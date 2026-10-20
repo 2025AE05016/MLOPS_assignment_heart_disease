@@ -4,7 +4,7 @@ End-to-end heart-disease classifier: reproducible data acquisition, EDA, tuned s
 pipelines, MLflow tracking and registry, pytest, a four-stage GitHub Actions pipeline,
 Docker, Kubernetes (kind / Minikube / Docker Desktop) with Ingress, and Prometheus + Grafana.
 
-Repository: https://github.com/Ankit-Bukshete/Heart_Disease_Mlops
+Repository: https://github.com/2025AE05016/MLOPS_assignment_heart_disease
 Student: Ankit Bukshete, BITS ID: 2025AE05016.
 Report: [reports/assignment_report.pdf](reports/assignment_report.pdf) (10 pages, also DOCX/MD).
 

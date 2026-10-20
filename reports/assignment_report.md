@@ -2,7 +2,7 @@
 
 ## 1. Project overview and architecture
 
-Student: Ankit Bukshete â€” BITS ID: 2025AE05016. Repository: https://github.com/Ankit-Bukshete/Heart_Disease_Mlops.
+Student: Ankit Bukshete — BITS ID: 2025AE05016. Repository: https://github.com/2025AE05016/MLOPS_assignment_heart_disease.
 
 HeartOps predicts presence of heart disease from 13 routine clinical attributes in the UCI Cleveland dataset and serves the model as a monitored API. The project covers the full MLOps lifecycle: reproducible data acquisition, EDA, tuned scikit-learn pipelines, MLflow tracking and registry, automated tests, a four-stage GitHub Actions pipeline, a Docker image, a Kubernetes deployment exposed through Ingress, and Prometheus/Grafana monitoring.
 
@@ -12,7 +12,7 @@ The diagram shows the four layers. Training produces one serialized pipeline (pr
 
 ## 2. Data acquisition and cleaning
 
-Source: Janosi, Steinbrunn, Pfisterer and Detrano (1989), Heart Disease, UCI Machine Learning Repository, DOI 10.24432/C52P4X, CC BY 4.0. scripts/download_data.py (via heartops.data.acquire) downloads the official archive, extracts processed.cleveland.data, validates 303 rows and diagnosis codes 0-4, stores the raw SHA-256 (a74b7efa387bc9d1...) and writes data/processed/heart.csv.
+Source: Janosi, Steinbrunn, Pfisterer and Detrano (1989), Heart Disease, UCI Machine Learning Repository, DOI 10.24432/C52P4X, CC BY 4.0. scripts/download_data.py (via heartops.data.acquire) downloads the official archive, extracts processed.cleveland.data, validates 303 rows and diagnosis codes 0-4, stores the raw SHA-256 (13f2c7cc1ebfc284...) and writes data/processed/heart.csv.
 
 Cleaning: "?" markers become NaN (ca: 4, thal: 2 - only 6 cells). Diagnosis 1-4 is mapped to 1 (disease present). Original UCI codes are kept (cp 1-4, slope 1-3, thal 3/6/7). Missing values are deliberately not imputed on the whole dataset; imputation is learned inside each CV fold to avoid leakage.
 
@@ -98,7 +98,7 @@ Monitoring: every request is logged as JSON (request id, route, status, latency;
 
 ## 10. Submission, access and limitations
 
-Repository: https://github.com/Ankit-Bukshete/Heart_Disease_Mlops. Local access: docker compose up -d --build (API :8000, Prometheus :9090, Grafana :3000) or ./scripts/deploy_kind.sh (ingress :8081). Evidence is in screenshots/, artifacts/ and reports/verification.md.
+Repository: https://github.com/2025AE05016/MLOPS_assignment_heart_disease. Local access: docker compose up -d --build (API :8000, Prometheus :9090, Grafana :3000) or ./scripts/deploy_kind.sh (ingress :8081). Evidence is in screenshots/, artifacts/ and reports/verification.md.
 
 Notebooks: notebooks/01_eda, 02_training, 03_inference (executed). Inference CLI: scripts/predict.py (local model or --url for the deployed API).
 
