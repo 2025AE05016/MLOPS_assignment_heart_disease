@@ -72,9 +72,11 @@ Packaging: artifacts/model.joblib holds the complete pipeline; the same model is
 
 Tests (pytest, 16): dataset shape/missingness, provenance, EDA output, scaling and encoding, grid validity, serialization equivalence, API validation and metrics, inference CLI and a ROC-AUC >= 0.80 quality gate.
 
-GitHub Actions (.github/workflows/ci.yml) runs four dependent jobs: lint (ruff) -> train + test (JUnit XML, step summary, report) -> Docker build + HTTP smoke test -> kind deploy + ingress verification. Any failure stops later jobs; logs and artifacts (model, MLflow store, test XML, container and k8s evidence) are uploaded.
+GitHub Actions (.github/workflows/ci.yml) runs four dependent jobs: lint (ruff) -> train + test (JUnit XML, step summary, report) -> Docker build + HTTP smoke test -> kind deploy + ingress verification. Any failure stops later jobs; logs and artifacts (model, MLflow store, test XML, container and k8s evidence) are uploaded. Run #1 on GitHub passed all four jobs in 7m 8s.
 
 ![01_lint_and_unit_tests](../screenshots/01_lint_and_unit_tests.png)
+
+![10b_github_actions_summary](../screenshots/10b_github_actions_summary.png)
 
 ## 8. Model serving and containerization
 

@@ -113,8 +113,9 @@ def pages(metrics, identity):
             'GitHub Actions (.github/workflows/ci.yml) runs four dependent jobs: lint (ruff) -> '
             'train + test (JUnit XML, step summary, report) -> Docker build + HTTP smoke test '
             '-> kind deploy + ingress verification. Any failure stops later jobs; logs and '
-            'artifacts (model, MLflow store, test XML, container and k8s evidence) are uploaded.'],
-         [shots / '01_lint_and_unit_tests.png']),
+            'artifacts (model, MLflow store, test XML, container and k8s evidence) are uploaded. '
+            'Run #1 on GitHub passed all four jobs in 7m 8s.'],
+         [shots / '01_lint_and_unit_tests.png', shots / '10b_github_actions_summary.png']),
         ('8. Model serving and containerization', [
             'FastAPI (src/heartops/api.py) loads the pipeline at startup. POST /predict accepts a '
             'JSON patient (Pydantic-validated ranges and codes; unknown fields rejected; ca/thal '

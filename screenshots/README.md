@@ -19,10 +19,10 @@ actual command output, rendered to PNG by `scripts/render_terminal.py`.
 | `07_api_request_logs_and_metrics.png` | JSON request logs and Prometheus metrics |
 | `08_prometheus_targets.png` | Prometheus target `heartops` UP |
 | `09_grafana_dashboard.png` | Grafana dashboard after ~900 requests |
+| `10_github_actions_run.png` | GitHub Actions run #1: all 4 jobs green (7m 8s), 5 uploaded artifacts |
+| `10b_github_actions_summary.png` | Cropped run summary + job graph (used in the report) |
 
 ## Still to capture yourself
 
-1. **GitHub Actions** — after pushing, screenshot the successful run (all 4 jobs green) and the
-   uploaded artifacts list. Save as `10_github_actions_run.png`.
-2. **Video** — short recording: data download, training, MLflow comparison, `pytest`, CI run,
+1. **Video** — short recording: data download, training, MLflow comparison, `pytest`, CI run,
    `docker build` + `/predict`, `./scripts/deploy_kind.sh`, Grafana dashboard.

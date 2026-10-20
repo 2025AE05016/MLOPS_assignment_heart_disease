@@ -17,8 +17,8 @@ Executed on 20 October 2026, macOS (x86_64), Python 3.12.6, Docker Desktop 24.0.
 | Monitoring | Prometheus target UP; Grafana dashboard populated by ~900 requests | screenshots 07–09 |
 | Report | PDF verified at exactly 10 pages; DOCX and Markdown generated | `reports/assignment_report.*` |
 
-Not yet executed from this workspace (requires the student's GitHub account):
-- GitHub Actions run — workflow is ready; push and capture the run + artifacts screenshot.
-- Video recording of the pipeline.
+| GitHub Actions | Run #1 on push to main: lint, train + test, Docker smoke test, kind deploy all succeeded (7m 8s); 5 artifacts | https://github.com/Ankit-Bukshete/Heart_Disease_Mlops/actions/runs/39438018947, screenshot 10 |
+
+Still to do: video recording of the pipeline.
 
 On kind the LoadBalancer EXTERNAL-IP remains `<pending>`; the service is exposed via Ingress.
