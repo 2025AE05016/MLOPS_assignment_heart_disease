@@ -1,4 +1,4 @@
-# HeartOps — UCI Heart Disease MLOps assignment
+# HeartOps — UCI Heart Disease MLOps assignment.
 
 End-to-end heart-disease classifier: reproducible data acquisition, EDA, tuned scikit-learn
 pipelines, MLflow tracking and registry, pytest, a four-stage GitHub Actions pipeline,
