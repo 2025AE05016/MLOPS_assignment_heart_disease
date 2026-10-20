@@ -1,0 +1,17 @@
+# Routes http://<ingress-host>/ to the heartops Service (ingress-nginx controller).
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: heartops
+  labels: {app: heartops}
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: heartops
+                port: {number: 80}

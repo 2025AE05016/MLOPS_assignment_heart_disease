@@ -1,0 +1,22 @@
+$ kubectl get nodes -o wide
+NAME                     STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION            CONTAINER-RUNTIME
+heartops-control-plane   Ready    control-plane   5m5s   v1.37.0   172.19.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.5.11-linuxkit (amd64)   containerd://2.3.4
+
+$ kubectl get deploy,pods,svc,ingress -l app=heartops -o wide
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES           SELECTOR
+deployment.apps/heartops   2/2     2            2           2m41s   api          heartops:local   app=heartops
+
+NAME                            READY   STATUS    RESTARTS   AGE   IP            NODE                     NOMINATED NODE   READINESS GATES
+pod/heartops-78fdc965fb-8t69k   1/1     Running   0          25s   10.244.0.14   heartops-control-plane   <none>           <none>
+pod/heartops-78fdc965fb-jgx8g   1/1     Running   0          13s   10.244.0.15   heartops-control-plane   <none>           <none>
+
+NAME               TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+service/heartops   LoadBalancer   10.96.153.36   <pending>     80:31364/TCP   2m40s   app=heartops
+
+NAME                                 CLASS   HOSTS   ADDRESS     PORTS   AGE
+ingress.networking.k8s.io/heartops   nginx   *       localhost   80      2m40s
+
+$ curl http://localhost:8081/health
+{"status":"ok"}
+$ curl -X POST http://localhost:8081/predict -d @examples/patient.json
+{"prediction":0,"disease_probability":0.38090219387565344,"confidence":0.6190978061243466,"threshold":0.5}

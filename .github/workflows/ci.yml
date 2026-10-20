@@ -1,0 +1,120 @@
+name: HeartOps CI/CD
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  lint:
+    name: 1 · Lint (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '${{ env.PYTHON_VERSION }}'}
+      - run: pip install ruff==0.14.1
+      - run: ruff check src tests scripts --output-format=github
+
+  train-and-test:
+    name: 2 · Train model + unit tests
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '${{ env.PYTHON_VERSION }}'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt && pip install --no-deps -e .
+      - name: Download data and train (MLflow tracked)
+        run: |
+          set -o pipefail
+          python -m heartops.train 2>&1 | tee artifacts-training.log
+      - name: Unit tests
+        run: |
+          set -o pipefail
+          mkdir -p artifacts
+          mv artifacts-training.log artifacts/training.log
+          pytest -v --junitxml=artifacts/tests.xml 2>&1 | tee artifacts/tests.log
+      - name: Test summary
+        if: always()
+        run: |
+          python - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib, xml.etree.ElementTree as ET
+          print("## Unit tests")
+          if pathlib.Path("artifacts/tests.xml").exists():
+              s = ET.parse("artifacts/tests.xml").getroot().find("testsuite")
+              print(f"tests={s.get('tests')} failures={s.get('failures')} errors={s.get('errors')}")
+          p = pathlib.Path("artifacts/metrics.json")
+          if p.exists():
+              m = json.loads(p.read_text())
+              print(f"\n## Model\nSelected **{m['selected']}**\n\n| metric | held-out |\n|---|---|")
+              for k, v in m["heldout_metrics"].items():
+                  print(f"| {k} | {v:.4f} |")
+          EOF
+      - name: Build report
+        run: python scripts/build_report.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: training-and-tests
+          path: |
+            artifacts/
+            reports/
+            mlruns/
+            mlflow.db
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model
+          path: artifacts/model.joblib
+
+  container:
+    name: 3 · Docker build + smoke test
+    needs: train-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: {name: model, path: artifacts}
+      - run: docker build -t heartops:ci .
+      - name: Container smoke test
+        run: |
+          docker run -d --name heartops -p 8000:8000 heartops:ci
+          trap 'docker logs heartops > container.log 2>&1; docker rm -f heartops' EXIT
+          for i in $(seq 1 30); do curl -fsS http://localhost:8000/ready && break; sleep 2; done
+          curl -fsS http://localhost:8000/ready
+          curl -fsS -H 'Content-Type: application/json' --data @examples/patient.json \
+            http://localhost:8000/predict | tee prediction.json
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Content-Type: application/json' \
+            -d '{"age": -1}' http://localhost:8000/predict)" = 422
+      - run: docker save heartops:ci -o heartops-image.tar
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: container-evidence
+          path: |
+            prediction.json
+            container.log
+      - uses: actions/upload-artifact@v4
+        with: {name: image, path: heartops-image.tar, retention-days: 3}
+
+  deploy-kind:
+    name: 4 · Deploy to Kubernetes (kind) + verify
+    needs: container
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: {name: image}
+      - uses: helm/kind-action@v1
+        with:
+          cluster_name: heartops
+          config: deploy/kind-config.yaml
+      - run: docker load -i heartops-image.tar && docker tag heartops:ci heartops:local
+      - name: Deploy and verify via ingress
+        run: ./scripts/deploy_kind.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: k8s-evidence, path: artifacts/k8s/}

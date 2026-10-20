@@ -1,0 +1,24 @@
+services:
+  api:
+    build: .
+    image: heartops:local
+    ports: ['8000:8000']
+  prometheus:
+    image: prom/prometheus:v3.7.1
+    volumes:
+      - ./deploy/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports: ['9090:9090']
+    depends_on: [api]
+  grafana:
+    image: grafana/grafana:12.2.1
+    ports: ['3000:3000']
+    environment:
+      # Local demo only: read-only anonymous viewing of the provisioned dashboard.
+      GF_AUTH_ANONYMOUS_ENABLED: 'true'
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/heartops.json
+    volumes:
+      - ./deploy/monitoring/datasource.yml:/etc/grafana/provisioning/datasources/heartops.yml:ro
+      - ./deploy/monitoring/dashboard-provider.yml:/etc/grafana/provisioning/dashboards/heartops.yml:ro
+      - ./deploy/monitoring/dashboard.json:/var/lib/grafana/dashboards/heartops.json:ro
+    depends_on: [prometheus]

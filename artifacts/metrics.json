@@ -1,0 +1,59 @@
+{
+  "selected": "logistic",
+  "train_rows": 242,
+  "test_rows": 61,
+  "seed": 42,
+  "candidates": [
+    {
+      "name": "logistic",
+      "cv_accuracy": 0.8511054421768707,
+      "cv_precision": 0.8775589656152315,
+      "cv_recall": 0.7920948616600791,
+      "cv_roc_auc": 0.9113442113442114,
+      "cv_roc_auc_std": 0.017971072232300232,
+      "params": {
+        "classifier__C": 0.1,
+        "classifier__class_weight": null
+      }
+    },
+    {
+      "name": "forest",
+      "cv_accuracy": 0.8180272108843537,
+      "cv_precision": 0.8261531279178337,
+      "cv_recall": 0.773913043478261,
+      "cv_roc_auc": 0.898474713692105,
+      "cv_roc_auc_std": 0.028989679574913788,
+      "params": {
+        "classifier__max_depth": null,
+        "classifier__min_samples_leaf": 4
+      }
+    }
+  ],
+  "heldout_metrics": {
+    "accuracy": 0.8852459016393442,
+    "precision": 0.8387096774193549,
+    "recall": 0.9285714285714286,
+    "roc_auc": 0.9610389610389611
+  },
+  "threshold": 0.5,
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "class_counts": {
+    "0": 164,
+    "1": 139
+  },
+  "data_sha256": "a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8"
+}

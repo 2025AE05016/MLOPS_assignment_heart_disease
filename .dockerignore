@@ -1,0 +1,11 @@
+.venv
+.git
+mlruns
+mlflow.db
+reports
+data
+tests
+screenshots
+notebooks
+artifacts/k8s
+*.png

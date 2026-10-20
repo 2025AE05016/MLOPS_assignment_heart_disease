@@ -1,0 +1,73 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 428B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 99B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.0s
+
+#4 [1/9] FROM docker.io/library/python:3.12-slim
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 46.11kB done
+#5 DONE 0.0s
+
+#6 [4/9] RUN pip install --no-cache-dir -r requirements.txt
+#6 CACHED
+
+#7 [2/9] WORKDIR /app
+#7 CACHED
+
+#8 [3/9] COPY requirements.txt ./
+#8 CACHED
+
+#9 [5/9] COPY pyproject.toml ./
+#9 CACHED
+
+#10 [6/9] COPY src ./src
+#10 DONE 0.0s
+
+#11 [7/9] RUN pip install --no-cache-dir --no-deps .
+#11 0.578 Processing /app
+#11 0.583   Installing build dependencies: started
+#11 2.387   Installing build dependencies: finished with status 'done'
+#11 2.388   Getting requirements to build wheel: started
+#11 2.659   Getting requirements to build wheel: finished with status 'done'
+#11 2.661   Preparing metadata (pyproject.toml): started
+#11 2.915   Preparing metadata (pyproject.toml): finished with status 'done'
+#11 2.919 Building wheels for collected packages: heartops-assignment
+#11 2.920   Building wheel for heartops-assignment (pyproject.toml): started
+#11 3.216   Building wheel for heartops-assignment (pyproject.toml): finished with status 'done'
+#11 3.216   Created wheel for heartops-assignment: filename=heartops_assignment-0.1.0-py3-none-any.whl size=8590 sha256=8c6a984b6d8ed998d22dd7451870346a0be42d34522955ff4334b687806f2c93
+#11 3.217   Stored in directory: /tmp/pip-ephem-wheel-cache-bgsqzf7e/wheels/54/1b/b7/aa63e25c8f14f4f2ae7b04e6097bdecb770e455c5c1ee0a600
+#11 3.220 Successfully built heartops-assignment
+#11 3.220 Installing collected packages: heartops-assignment
+#11 3.247 Successfully installed heartops-assignment-0.1.0
+#11 3.248 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#11 3.344 
+#11 3.344 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
+#11 3.344 [notice] To update, run: pip install --upgrade pip
+#11 DONE 3.5s
+
+#12 [8/9] COPY artifacts/model.joblib artifacts/model.joblib
+#12 DONE 0.1s
+
+#13 [9/9] RUN useradd --uid 10001 --create-home appuser
+#13 DONE 0.3s
+
+#14 exporting to image
+#14 exporting layers 0.0s done
+#14 writing image sha256:8ffd634596d2790994a369aec2dd08f11551e6a1b854b053ca98db4cfacb2b54 done
+#14 naming to docker.io/library/heartops:local done
+#14 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/0h1rn6gcjppgcqoalv68mz6uy
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview

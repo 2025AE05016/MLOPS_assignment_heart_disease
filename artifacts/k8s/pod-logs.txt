@@ -1,0 +1,22 @@
+[pod/heartops-78fdc965fb-8t69k/api] INFO:     Started server process [1]
+[pod/heartops-78fdc965fb-8t69k/api] INFO:     Waiting for application startup.
+[pod/heartops-78fdc965fb-8t69k/api] INFO:     Application startup complete.
+[pod/heartops-78fdc965fb-8t69k/api] INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[pod/heartops-78fdc965fb-8t69k/api] INFO:heartops:{"request_id": "070861a7-37de-44c5-8828-b457b5716659", "route": "/ready", "status": 200, "seconds": 0.0016862769998624572}
+[pod/heartops-78fdc965fb-8t69k/api] INFO:     10.244.0.1:45110 - "GET /ready HTTP/1.1" 200 OK
+[pod/heartops-78fdc965fb-8t69k/api] INFO:heartops:{"request_id": "9866417c-752f-4572-b35c-3b7031f91209", "route": "/health", "status": 200, "seconds": 0.0015899190000254748}
+[pod/heartops-78fdc965fb-8t69k/api] INFO:     10.244.0.1:48094 - "GET /health HTTP/1.1" 200 OK
+[pod/heartops-78fdc965fb-8t69k/api] INFO:     10.244.0.1:48110 - "GET /ready HTTP/1.1" 200 OK
+[pod/heartops-78fdc965fb-8t69k/api] INFO:heartops:{"request_id": "af4a73bb-73eb-4f77-aae2-99ff6f7c0e04", "route": "/ready", "status": 200, "seconds": 0.0010850690000552277}
+[pod/heartops-78fdc965fb-8t69k/api] INFO:     10.244.0.7:53776 - "GET /ready HTTP/1.1" 200 OK
+[pod/heartops-78fdc965fb-8t69k/api] INFO:heartops:{"request_id": "c2ff9083-693c-4951-a8d0-72ace6d4caee", "route": "/ready", "status": 200, "seconds": 0.0007656029999907332}
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:     Started server process [1]
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:     Waiting for application startup.
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:     Application startup complete.
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:heartops:{"request_id": "0b84bca5-1f0d-4351-8837-bdd9809ef95e", "route": "/ready", "status": 200, "seconds": 0.0017296830001214403}
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:     10.244.0.1:59638 - "GET /ready HTTP/1.1" 200 OK
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:     10.244.0.7:42502 - "GET /health HTTP/1.1" 200 OK
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:heartops:{"request_id": "2eb65b4a-6adc-487a-80e9-58e59496b8f9", "route": "/health", "status": 200, "seconds": 0.0014818129998275253}
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:     10.244.0.7:42518 - "POST /predict HTTP/1.1" 200 OK
+[pod/heartops-78fdc965fb-jgx8g/api] INFO:heartops:{"request_id": "09db145b-5c18-424a-9947-f1ddc382604c", "route": "/predict", "status": 200, "seconds": 0.008868230999951265}

@@ -1,0 +1,13 @@
+................                                                         [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/starlette/testclient.py:51
+  /Users/ambarbhatnagar/Desktop/MLOPS_Assignment/Bits_assignment/.venv/lib/python3.12/site-packages/starlette/testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+tests/test_components.py: 12 warnings
+  /Users/ambarbhatnagar/Desktop/MLOPS_Assignment/Bits_assignment/.venv/lib/python3.12/site-packages/seaborn/categorical.py:700: PendingDeprecationWarning: vert: bool will be deprecated in a future version. Use orientation: {'vertical', 'horizontal'} instead.
+    artists = ax.bxp(**boxplot_kws)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /Users/ambarbhatnagar/Desktop/MLOPS_Assignment/Bits_assignment/artifacts/tests.xml -
+16 passed, 13 warnings in 14.50s
